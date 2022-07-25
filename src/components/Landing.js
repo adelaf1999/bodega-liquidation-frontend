@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {initializeHomePage}  from "../actions";
 
+
+
 class Landing extends Component{
 
     constructor(props) {
 
-        super(props);
-
         const history = props.history;
 
-        this.state = {
-            history
-        };
+        console.log(props);
+
+        super(props);
+
 
     }
 
@@ -20,6 +21,7 @@ class Landing extends Component{
     componentDidMount(){
 
         this.props.initializeHomePage();
+
 
     }
 

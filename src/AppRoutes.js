@@ -1,25 +1,27 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    Routes,
+    Switch,
     Route
 } from "react-router-dom";
 
 import Landing from "./components/Landing";
 
 
+
 export default function AppRoutes() {
+
 
     return(
 
         <Router>
 
-            <Routes>
+            <Switch>
 
-                <Route exact path="/" element={<Landing/>} />
+                <Route exact path="/" component={Landing} />
 
 
-            </Routes>
+            </Switch>
 
         </Router>
 

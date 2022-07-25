@@ -10,6 +10,7 @@ import { persistStore} from 'redux-persist' // only add persist code when persis
 import { PersistGate } from 'redux-persist/integration/react'; // only add persist code when persisted reducer present, else app wont render
 
 
+
 export default function App() {
 
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
@@ -18,7 +19,7 @@ export default function App() {
 
         <Provider store={store}>
 
-            <AppRoutes/>
+            <AppRoutes  />
 
         </Provider>
 

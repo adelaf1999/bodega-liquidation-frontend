@@ -8,7 +8,9 @@ import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
 
+
 export const initializeHomePage = () => {
+
 
     return(dispatch) => {
 
@@ -36,7 +38,9 @@ export const initializeHomePage = () => {
                 dispatch({type: INITIALIZE_LANDING_PAGE_COMPLETE, payload: {
                     categories: categories,
                     topics: topics
-                }})
+                }});
+
+
 
             }).catch(error => {
 
