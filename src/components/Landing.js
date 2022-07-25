@@ -10,15 +10,23 @@ class Landing extends Component{
 
         const history = props.history;
 
-        console.log(props);
-
+        const params = props.match.params;
+        
         super(props);
+
+        this.state = {
+            history,
+            params
+        };
+
 
 
     }
 
 
     componentDidMount(){
+
+
 
         this.props.initializeHomePage();
 
