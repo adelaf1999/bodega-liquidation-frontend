@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import AppRoutes from "./AppRoutes";
+import reducers from "./reducers";
+import {createStore, applyMiddleware} from 'redux';
+import ReduxThunk from "redux-thunk";
+import { Provider } from 'react-redux';
+import { persistStore} from 'redux-persist' // only add persist code when persisted reducer present, else app wont render
+import { PersistGate } from 'redux-persist/integration/react'; // only add persist code when persisted reducer present, else app wont render
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default function App() {
+
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
+    return(
+
+        <Provider store={store}>
+
+            <AppRoutes/>
+
+        </Provider>
+
+    );
+
+
 }
-
-export default App;
