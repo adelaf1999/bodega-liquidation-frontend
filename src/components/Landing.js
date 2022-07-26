@@ -12,11 +12,12 @@ class Landing extends Component {
 
     constructor(props) {
 
+        super(props);
+
         const history = props.history;
 
         const params = props.match.params;
 
-        super(props);
 
         const width = window.innerWidth;
 
