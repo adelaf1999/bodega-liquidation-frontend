@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {initializeHomePage} from "../actions";
-import {Navbar, Form, FormControl, Offcanvas, Button, Accordion, Card, Image} from "react-bootstrap";
+import {Navbar, Form, FormControl, Offcanvas, Button, Accordion, Card, Image, Spinner} from "react-bootstrap";
 import {List as HamburgerIcon, ChevronRight} from 'react-bootstrap-icons';
 import _ from "lodash";
 import {ScrollMenu} from "react-horizontal-scrolling-menu";
@@ -151,6 +151,41 @@ class Landing extends Component {
     }
 
 
+    renderBody(){
+
+        const { initializing_page, initializing_user_page} = this.props;
+
+
+        if(initializing_page || initializing_user_page){
+
+            return(
+
+                <div>
+
+                    <Spinner animation="border" variant="primary" className="spinner" />
+
+                </div>
+
+            );
+
+        }else{
+
+            return(
+
+                <div>
+
+                    <TopHeader history={this.state.history} params={this.state.params}/>
+
+                    {this.renderTopics()}
+
+
+                </div>
+
+            )
+        }
+
+    }
+
 
 
     render() {
@@ -160,14 +195,11 @@ class Landing extends Component {
 
         return (
 
-            <div>
+            <Fragment>
 
-                <TopHeader history={this.state.history} params={this.state.params}/>
+                {this.renderBody()}
 
-                {this.renderTopics()}
-
-
-            </div>
+            </Fragment>
 
         );
 

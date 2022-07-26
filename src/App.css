@@ -16,13 +16,11 @@
 .searchbar{
     margin-top: 2rem;
 }
-/*.logo{*/
-    /*object-fit: contain;*/
-    /*width: 75px;*/
-    /*height: 75px;*/
-    /*margin-left: 10px;*/
-/*}*/
 .logo{
     object-fit: contain;
 }
-
+.spinner{
+    position: absolute;
+    left: 45%;
+    top: 50%;
+}
