@@ -1,0 +1,20 @@
+@import "Landing.css";
+
+.center-container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.searchbar-container{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.searchbar{
+    margin-top: 2rem;
+    width: 50%;
+    border-radius: 20px;
+}
