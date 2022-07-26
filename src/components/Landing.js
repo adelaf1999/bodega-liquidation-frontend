@@ -189,9 +189,7 @@ class Landing extends Component {
 
 
     render() {
-
-        // show bars on the left if on mobile device or smaller screen
-
+        
 
         return (
 
