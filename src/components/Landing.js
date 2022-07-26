@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {initializeHomePage} from "../actions";
 import {Navbar, Form, FormControl, Offcanvas, Button, Accordion, Card, Image} from "react-bootstrap";
 import {List as HamburgerIcon, ChevronRight} from 'react-bootstrap-icons';
 import _ from "lodash";
 import {ScrollMenu} from "react-horizontal-scrolling-menu";
+import {isMobile, isDesktop, isTablet} from 'react-device-detect';
 
 
 class Landing extends Component {
@@ -313,7 +314,13 @@ class Landing extends Component {
 
             return(
 
-                <Card key={topic.id} style={{marginBottom: '2rem', width: this.state.width / 1.8}}>
+                <Card
+                    key={topic.id}
+                    style={{
+                        marginBottom: '2rem',
+                        width: isMobile ? this.state.width - 25 : this.state.width / 1.8
+                    }}
+                >
 
                     <Card.Header style={{
                         fontSize: '20px',
@@ -367,6 +374,211 @@ class Landing extends Component {
     }
 
 
+
+    renderLogo(){
+
+        return(
+            <Image
+                src={require("../images/icon.png")}
+                style={
+                    isMobile ? { width: '100px', height: '100px'} : {  width: '75px', height: '75px', marginLeft: '10px' }
+                }
+                className="logo"
+            />
+        );
+
+    }
+
+    renderCompanyName(){
+        return(
+            <Navbar.Brand
+                onClick={() => {
+                    this.state.history.push("/");
+                }}
+                style={{
+                    color: "#fff",
+                    fontWeight: 'bold',
+                    fontSize: 18,
+                    marginRight: '50px'
+                }}
+            >
+                Bodega Liquidation
+            </Navbar.Brand>
+
+        );
+    }
+
+    renderMenuTitle(){
+
+        if(!isMobile){
+
+            return(
+
+                <Button
+                    style={{
+                        color: '#fff',
+                        fontSize: 20,
+                        border: 'None',
+                        background: 'None',
+                        margin: '0',
+                        padding: '0'
+                    }}
+                    onClick={() => {
+                        this.showSideMenu();
+                    }}
+                    id="lading-menu-button"
+                >
+                    Menu
+                </Button>
+
+            );
+
+        }
+
+    }
+
+    renderMenu(){
+
+        return(
+
+            <Fragment>
+
+                <HamburgerIcon
+                    color="#fff"
+                    size={isMobile ? 30 : 20}
+                    onClick={() => {
+                        this.showSideMenu();
+                    }}
+                    style={{
+                        marginRight: isMobile ? '5px' :  '2px'
+                    }}
+                />
+
+                {this.renderMenuTitle()}
+
+            </Fragment>
+
+        );
+
+    }
+
+
+    renderSearchBar(){
+
+        return(
+
+            <Form className="searchbar-container">
+
+                <FormControl
+                    type="text"
+                    placeholder="Search Bodega Liquidation"
+                    className="mr-sm-2 searchbar"
+                    style={{
+                        marginRight: isMobile ? 0 : this.state.width / 4,
+                        borderRadius: '20px',
+                        width: isMobile ? this.state.width / 1.2 : '50%',
+                    }}
+                />
+
+            </Form>
+
+        );
+
+    }
+
+
+
+
+    renderHeaderContent(){
+
+        if(isMobile){
+
+            return(
+
+                <Navbar className="landing-navbar" style={{
+                    marginBottom: '1.5rem',
+                    display: 'flex',
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column'
+                }}>
+
+
+                    <div>
+
+                        {this.renderLogo()}
+
+                    </div>
+
+
+                    <div style={{
+                        display: 'flex',
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'row'
+                    }}>
+
+                        {this.renderMenu()}
+
+
+
+                        {this.renderSearchBar()}
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                </Navbar>
+
+
+            );
+
+
+
+        }else{
+
+            return(
+
+                <Navbar className="landing-navbar" style={{ marginBottom: '2.5rem'}}>
+
+                    <div>
+
+
+                        {this.renderLogo()}
+
+
+                        {this.renderCompanyName()}
+
+                    </div>
+
+
+                    {this.renderMenu()}
+
+
+                    {this.renderSearchBar()}
+
+
+
+                </Navbar>
+
+            );
+
+        }
+
+    }
+
+
+
     render() {
 
         // show bars on the left if on mobile device or smaller screen
@@ -376,84 +588,7 @@ class Landing extends Component {
 
             <div>
 
-                <Navbar style={{backgroundColor: '#000080', marginBottom: '2.5rem'}}>
-
-                    <div>
-
-
-                        <Image
-                            src={require("../images/icon.png")}
-                            className="logo"
-                        />
-
-
-                        <Navbar.Brand
-                            onClick={() => {
-                                this.state.history.push("/");
-                            }}
-                            style={{
-                                color: "#fff",
-                                fontWeight: 'bold',
-                                fontSize: 18,
-                                marginRight: '50px'
-                            }}
-                        >
-                            Bodega Liquidation
-                        </Navbar.Brand>
-
-
-                    </div>
-
-
-                    <HamburgerIcon
-                        color="#fff" size={20}
-                        onClick={() => {
-                            this.showSideMenu();
-                        }}
-                        style={{
-                            marginRight: '2px'
-                        }}
-                    />
-
-                    <Button
-                        style={{
-                            color: '#fff',
-                            fontSize: 20,
-                            border: 'None',
-                            background: 'None',
-                            margin: '0',
-                            padding: '0'
-                        }}
-                        onClick={() => {
-                            this.showSideMenu();
-                        }}
-                        id="lading-menu-button"
-                    >
-                        Menu
-                    </Button>
-
-
-                    <Form className="searchbar-container">
-
-                        <FormControl
-                            type="text"
-                            placeholder="Search Bodega Liquidation"
-                            className="mr-sm-2 searchbar"
-                            style={{
-                                marginRight: this.state.width / 4
-                            }}
-                        />
-
-                    </Form>
-
-
-                    <div>
-
-                    </div>
-
-
-                </Navbar>
-
+                {this.renderHeaderContent()}
 
                 {this.renderTopics()}
 
