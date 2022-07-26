@@ -1,0 +1,11 @@
+#lading-menu-button:focus {
+    box-shadow: none;
+}
+.category-items-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.category-chevron-icon{
+    margin-right: 6px;
+}

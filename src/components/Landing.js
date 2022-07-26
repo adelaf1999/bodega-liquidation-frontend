@@ -1,29 +1,32 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {initializeHomePage}  from "../actions";
-import { Navbar, Form, FormControl, Offcanvas, Button} from "react-bootstrap";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {initializeHomePage} from "../actions";
+import {Navbar, Form, FormControl, Offcanvas, Button, Accordion, Card} from "react-bootstrap";
+import {List as HamburgerIcon, ChevronRight} from 'react-bootstrap-icons';
+import _ from "lodash";
 
-
-class Landing extends Component{
+class Landing extends Component {
 
     constructor(props) {
 
         const history = props.history;
 
         const params = props.match.params;
-        
+
         super(props);
 
         const width = window.innerWidth;
 
         const height = window.innerHeight;
 
+        const side_menu_visible = false;
 
         this.state = {
             history,
             params,
             width,
-            height
+            height,
+            side_menu_visible
         };
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -34,7 +37,7 @@ class Landing extends Component{
 
     updateWindowDimensions() {
 
-        this.setState({ width: window.innerWidth, height: window.innerHeight });
+        this.setState({width: window.innerWidth, height: window.innerHeight});
 
     }
 
@@ -46,7 +49,7 @@ class Landing extends Component{
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
 
         this.updateWindowDimensions();
 
@@ -57,13 +60,212 @@ class Landing extends Component{
     }
 
 
+    showSideMenu() {
+        this.setState({side_menu_visible: true});
+    }
 
 
-    render(){
+    renderSubcategories(subcategories){
+
+        return _.map(subcategories, (subcategory) => {
+
+            return(
+
+                <Card
+                    key={subcategory.id}
+                    style={{marginBottom: '10px'}}
+                    onClick={() => {
+                        console.log(`${subcategory.name} was clicked!`)
+                    }}
+                >
+
+                    <div className="category-items-container">
+
+                        <Card.Body>{subcategory.name}</Card.Body>
+
+                        <ChevronRight color="royalblue" size={20} className="category-chevron-icon"/>
+
+                    </div>
+
+
+
+
+                </Card>
+
+            );
+
+        });
+
+    }
+
+    renderParentCategory(category){
+
+        if(category.has_products){
+
+            return(
+
+
+                <Card
+                    key={category.id}
+                    style={{marginBottom: '10px'}}
+                    onClick={() => {
+                        console.log(`${category.name} was clicked`)
+                    }}
+                >
+                    <div className="category-items-container">
+
+                        <Card.Body>View All {category.name}</Card.Body>
+
+                        <ChevronRight color="royalblue" size={20} className="category-chevron-icon"/>
+
+                    </div>
+
+
+                </Card>
+
+
+            );
+
+        }
+
+    }
+
+    renderCategoriesList(){
+
+        const { categories } = this.props;
+
+        return _.map(categories, (category) => {
+
+            const subcategories = category.subcategories;
+
+            if(subcategories !== null && subcategories !== undefined && !_.isEmpty(subcategories)){
+
+                return(
+
+                    <Card key={category.id} style={{marginBottom: '10px'}}>
+
+                        <Accordion.Item eventKey={category.id}>
+
+                            <Accordion.Header>{category.name}</Accordion.Header>
+
+                            <Accordion.Body>
+
+                                {this.renderSubcategories(subcategories, category)}
+
+                                {this.renderParentCategory(category)}
+
+                            </Accordion.Body>
+
+                        </Accordion.Item>
+
+
+                    </Card>
+
+
+                );
+
+
+            }else{
+
+                return(
+
+                    <Card
+                        key={category.id}
+                        style={{marginBottom: '10px'}}
+                        onClick={() => {
+                            console.log(`${category.name} was clicked`)
+                        }}
+                    >
+
+                        <div className="category-items-container">
+
+                            <Card.Body>{category.name}</Card.Body>
+
+                            <ChevronRight color="royalblue" size={20} className="category-chevron-icon"/>
+
+                        </div>
+
+
+                    </Card>
+
+                );
+
+
+            }
+
+        });
+
+
+    }
+
+    renderCategories(){
+
+        const { categories } = this.props;
+
+        if(categories !== null && categories !== undefined && !_.isEmpty(categories)){
+
+
+            return(
+
+                <Accordion>
+
+                    {this.renderCategoriesList()}
+
+                </Accordion>
+
+            );
+
+
+        }else{
+
+            return <div/>;
+
+        }
+
+
+
+
+
+    }
+
+    sideMenu() {
+
+        const {side_menu_visible} = this.state;
+
+        if (side_menu_visible) {
+
+            return (
+
+                <Offcanvas
+                    show={side_menu_visible}
+                    onHide={() => this.setState({side_menu_visible: false})}
+                >
+
+                    <Offcanvas.Header closeButton>
+
+                        <Offcanvas.Title>Categories</Offcanvas.Title>
+
+                    </Offcanvas.Header>
+
+                    <Offcanvas.Body>
+
+                        {this.renderCategories()}
+
+                    </Offcanvas.Body>
+
+                </Offcanvas>
+
+            );
+
+        }
+
+    }
+
+    render() {
 
         // show bars on the left if on mobile device or smaller screen
 
-        return(
+        return (
 
             <div>
 
@@ -79,13 +281,42 @@ class Landing extends Component{
                                 color: "#fff",
                                 fontWeight: 'bold',
                                 fontSize: 18,
-                                marginLeft: '1rem'
+                                marginLeft: '1rem',
+                                marginRight: '50px'
                             }}
                         >
                             Bodega Liquidation
                         </Navbar.Brand>
 
                     </div>
+
+
+                    <HamburgerIcon
+                        color="#fff" size={20}
+                        onClick={() => {
+                            this.showSideMenu();
+                        }}
+                        style={{
+                            marginRight: '2px'
+                        }}
+                    />
+
+                    <Button
+                        style={{
+                            color: '#fff',
+                            fontSize: 20,
+                            border: 'None',
+                            background: 'None',
+                            margin: '0',
+                            padding: '0'
+                        }}
+                        onClick={() => {
+                            this.showSideMenu();
+                        }}
+                        id="lading-menu-button"
+                    >
+                        Menu
+                    </Button>
 
 
                     <Form className="searchbar-container">
@@ -95,22 +326,21 @@ class Landing extends Component{
                             placeholder="Search Bodega Liquidation"
                             className="mr-sm-2 searchbar"
                             style={{
-                                marginRight: this.state.width / 5.5
+                                marginRight: this.state.width / 5
                             }}
                         />
 
                     </Form>
 
 
+                    <div>
 
-
-
-                <div>
-
-                </div>
+                    </div>
 
 
                 </Navbar>
+
+                {this.sideMenu()}
 
 
             </div>
