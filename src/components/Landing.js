@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {initializeHomePage} from "../actions";
-import {Navbar, Form, FormControl, Offcanvas, Button, Accordion, Card} from "react-bootstrap";
+import {Navbar, Form, FormControl, Offcanvas, Button, Accordion, Card, Image} from "react-bootstrap";
 import {List as HamburgerIcon, ChevronRight} from 'react-bootstrap-icons';
 import _ from "lodash";
+import {ScrollMenu} from "react-horizontal-scrolling-menu";
+
 
 class Landing extends Component {
 
@@ -20,6 +22,7 @@ class Landing extends Component {
         const height = window.innerHeight;
 
         const side_menu_visible = false;
+
 
         this.state = {
             history,
@@ -261,15 +264,119 @@ class Landing extends Component {
 
     }
 
+
+
+
+
+    renderTopicMenu(topic){
+
+        const products = topic.products;
+
+        return(
+
+
+            <ScrollMenu key={topic.id}>
+
+                {products.map(product => (
+                    <Card
+                        key={product.id}
+                        style={{
+                            margin: '15px'
+                        }}
+                        onClick={() => {
+                            console.log(`${product.name} was clicked!`)
+                        }}
+                    >
+
+                        <Image
+                            src={product.main_picture_url}
+                            className="product-image"
+                        />
+
+                        <Card.Footer>{product.name}</Card.Footer>
+
+                    </Card>
+                ))}
+
+
+            </ScrollMenu>
+
+        );
+
+    }
+
+    renderTopicsList(){
+
+        const { topics } = this.props;
+
+        return _.map(topics, topic => {
+
+            return(
+
+                <Card key={topic.id} style={{marginBottom: '2rem', width: this.state.width / 1.8}}>
+
+                    <Card.Header style={{
+                        fontSize: '20px',
+                        backgroundColor: '#000080',
+                        color: '#fff',
+                        fontWeight: 'bold'
+                    }}>
+                        {topic.name}
+                    </Card.Header>
+
+                    <Card.Body>
+
+                        {this.renderTopicMenu(topic)}
+
+                    </Card.Body>
+
+                </Card>
+
+            );
+
+        });
+
+
+    }
+
+
+    renderTopics(){
+
+        const { topics } = this.props;
+
+        if(topics !== null && topics !== undefined && !_.isEmpty((topics))){
+
+            return(
+
+                <div style={{
+                    display: 'flex',
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column'
+                }}>
+
+                    {this.renderTopicsList()}
+
+                </div>
+
+            );
+
+        }
+
+    }
+
+
     render() {
 
         // show bars on the left if on mobile device or smaller screen
+
 
         return (
 
             <div>
 
-                <Navbar style={{backgroundColor: '#000080'}}>
+                <Navbar style={{backgroundColor: '#000080', marginBottom: '2.5rem'}}>
 
                     <div>
 
@@ -339,6 +446,9 @@ class Landing extends Component {
 
 
                 </Navbar>
+
+
+                {this.renderTopics()}
 
                 {this.sideMenu()}
 
