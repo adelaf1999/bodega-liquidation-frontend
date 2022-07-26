@@ -380,6 +380,13 @@ class Landing extends Component {
 
                     <div>
 
+
+                        <Image
+                            src={require("../images/icon.png")}
+                            className="logo"
+                        />
+
+
                         <Navbar.Brand
                             onClick={() => {
                                 this.state.history.push("/");
@@ -388,12 +395,12 @@ class Landing extends Component {
                                 color: "#fff",
                                 fontWeight: 'bold',
                                 fontSize: 18,
-                                marginLeft: '1rem',
                                 marginRight: '50px'
                             }}
                         >
                             Bodega Liquidation
                         </Navbar.Brand>
+
 
                     </div>
 
@@ -433,7 +440,7 @@ class Landing extends Component {
                             placeholder="Search Bodega Liquidation"
                             className="mr-sm-2 searchbar"
                             style={{
-                                marginRight: this.state.width / 5
+                                marginRight: this.state.width / 4
                             }}
                         />
 

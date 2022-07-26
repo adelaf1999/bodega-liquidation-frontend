@@ -18,3 +18,9 @@
     width: 50%;
     border-radius: 20px;
 }
+.logo{
+    object-fit: contain;
+    width: 75px;
+    height: 75px;
+    margin-left: 10px;
+}
