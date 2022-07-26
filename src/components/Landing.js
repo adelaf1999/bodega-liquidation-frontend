@@ -33,32 +33,15 @@ class Landing extends Component {
             height,
             side_menu_visible
         };
-
-        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-
+        
 
     }
 
 
-    updateWindowDimensions() {
-
-        this.setState({width: window.innerWidth, height: window.innerHeight});
-
-    }
-
-
-    componentWillUnmount() {
-
-        window.removeEventListener('resize', this.updateWindowDimensions);
-
-    }
 
 
     componentDidMount() {
 
-        this.updateWindowDimensions();
-
-        window.addEventListener('resize', this.updateWindowDimensions);
 
         this.props.initializeHomePage();
 
@@ -137,9 +120,9 @@ class Landing extends Component {
 
     renderCategoriesList(){
 
-        const { categories } = this.props;
+        const { header_categories } = this.props;
 
-        return _.map(categories, (category) => {
+        return _.map(header_categories, (category) => {
 
             const subcategories = category.subcategories;
 
@@ -205,9 +188,9 @@ class Landing extends Component {
 
     renderCategories(){
 
-        const { categories } = this.props;
+        const { header_categories} = this.props;
 
-        if(categories !== null && categories !== undefined && !_.isEmpty(categories)){
+        if(header_categories !== null && header_categories !== undefined && !_.isEmpty(header_categories)){
 
 
             return(
@@ -610,15 +593,20 @@ const mapStateToProps = (state) => {
 
     const {
         initializing_page,
-        categories,
         topics
     } = state.landing;
+
+    const {
+        initializing_user_page,
+        header_categories
+    } = state.user_pages;
 
 
     return {
         initializing_page,
-        categories,
-        topics
+        topics,
+        initializing_user_page,
+        header_categories
     };
 
 

@@ -3,10 +3,12 @@ import storage from 'redux-persist/lib/storage';
 
 
 import LandingReducer from "./LandingReducer";
+import UserPagesReducer from "./UserPagesReducer";
 
 
 const appReducer = combineReducers({
-    landing: LandingReducer
+    landing: LandingReducer,
+    user_pages: UserPagesReducer
 });
 
 

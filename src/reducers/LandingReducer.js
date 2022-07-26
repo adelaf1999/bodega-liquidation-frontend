@@ -5,7 +5,6 @@ import {
 
 const INITIAL_STATE = {
     initializing_page: false,
-    categories: [],
     topics: []
 };
 
@@ -16,7 +15,6 @@ export default (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 initializing_page: false,
-                categories: action.payload.categories,
                 topics: action.payload.topics
             };
         case INITIALIZE_LANDING_PAGE:
