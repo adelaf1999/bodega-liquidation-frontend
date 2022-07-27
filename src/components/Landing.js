@@ -32,7 +32,7 @@ class Landing extends Component {
             width,
             height
         };
-        
+
 
     }
 
@@ -60,7 +60,8 @@ class Landing extends Component {
                     <Card
                         key={product.id}
                         style={{
-                            margin: '15px'
+                            margin: isMobile ? '10px' : '15px',
+                            width: isMobile ? this.state.width - 70 : this.state.width / 5
                         }}
                         onClick={() => {
                             console.log(`${product.name} was clicked!`)
@@ -72,7 +73,12 @@ class Landing extends Component {
                             className="product-image"
                         />
 
-                        <Card.Footer>{product.name}</Card.Footer>
+                        <Card.Footer
+                            style={{
+                                height: '80px'
+                            }}>
+                            {product.name}
+                        </Card.Footer>
 
                     </Card>
                 ))}
@@ -194,7 +200,7 @@ class Landing extends Component {
 
 
     render() {
-        
+
 
         return (
 
