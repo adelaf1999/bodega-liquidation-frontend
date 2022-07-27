@@ -1,2 +1,3 @@
 export * from "./LandingActions";
 export * from "./UserPagesActions";
+export * from "./SearchProductActions";

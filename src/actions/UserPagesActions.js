@@ -13,7 +13,7 @@ export const getHeaderCategories = () => {
 
     return(dispatch) => {
 
-        console.log("fetching header categories");
+        // console.log("fetching header categories");
 
         dispatch({type: INITIALIZE_USER_PAGES});
 
@@ -30,7 +30,7 @@ export const getHeaderCategories = () => {
 
                 const header_categories = data.header_categories;
 
-                console.log(header_categories);
+                // console.log(header_categories);
 
                 dispatch({type: INITIALIZE_USER_PAGES_COMPLETE, payload: {
                     header_categories: header_categories

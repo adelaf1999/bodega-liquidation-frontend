@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 
 
 import Landing from "./components/Landing";
+import SearchProduct from "./components/SearchProduct";
 
 
 class AppRoutes extends Component{
@@ -30,6 +31,8 @@ class AppRoutes extends Component{
                 <Switch>
 
                     <Route exact path="/" component={Landing} />
+
+                    <Route exact path="/search-product" component={SearchProduct} />
 
 
                 </Switch>

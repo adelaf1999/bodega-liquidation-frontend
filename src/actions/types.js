@@ -2,6 +2,14 @@ export const BACKEND_DOMAIN =  ( !process.env.NODE_ENV || process.env.NODE_ENV =
 export const BACKEND_URL =  `${ ( !process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 'http' : 'https'}://${BACKEND_DOMAIN}`;
 
 
+// SearchProductTypes
+export const SEARCH_PRODUCT_ROUTE = `${BACKEND_URL}/user-search-product`;
+export const SEARCH_PRODUCT = "search_product";
+export const SEARCH_PRODUCT_SUCCESS = "search_product_success";
+export const SEARCH_PRODUCT_FAILURE = "search_product_failure";
+export const CLEAR_PRODUCT_NAME_SEARCH = "clear_product_name_search";
+export const PRODUCT_NAME_CHANGED = "product_name_changed";
+
 // Landing Page Types
 export const INITIALIZE_LANDING_PAGE_ROUTE = `${BACKEND_URL}/initialize-landing-page`;
 export const INITIALIZE_LANDING_PAGE = "initialize_landing_page";

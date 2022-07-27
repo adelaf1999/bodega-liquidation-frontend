@@ -4,7 +4,11 @@ import {Navbar, Form, FormControl, Offcanvas, Button, Accordion, Card, Image} fr
 import {List as HamburgerIcon, ChevronRight} from 'react-bootstrap-icons';
 import _ from "lodash";
 import {isMobile, isDesktop, isTablet} from 'react-device-detect';
-
+import {
+    productNameChanged,
+    clearProductNameSearch,
+    searchProduct
+} from "../actions";
 
 class TopHeader extends Component{
 
@@ -16,6 +20,7 @@ class TopHeader extends Component{
 
         const params = this.props.params;
 
+        const location = this.props.location;
 
         const width = window.innerWidth;
 
@@ -27,6 +32,7 @@ class TopHeader extends Component{
         this.state = {
             history,
             params,
+            location,
             width,
             height,
             side_menu_visible
@@ -35,6 +41,26 @@ class TopHeader extends Component{
 
     }
 
+
+    componentDidMount(){
+
+        const { location } = this.state;
+
+        const { clearProductNameSearch } = this.props;
+
+        if(location.pathname !== "/search-product"){
+
+            // Clear product name for all components having a search bar when mounted
+
+            // EXCEPT search product component
+
+            clearProductNameSearch();
+
+
+        }
+
+
+    }
 
     renderLogo(){
 
@@ -45,6 +71,9 @@ class TopHeader extends Component{
                     isMobile ? { width: '100px', height: '100px'} : {  width: '75px', height: '75px', marginLeft: '10px' }
                 }
                 className="logo"
+                onClick={() => {
+                    this.state.history.push("/");
+                }}
             />
         );
 
@@ -112,6 +141,10 @@ class TopHeader extends Component{
 
     renderSearchBar(){
 
+        const { productNameChanged, product_name, searchProduct } = this.props;
+
+        const { history, location } = this.state;
+
         return(
 
             <Form className="searchbar-container">
@@ -125,6 +158,28 @@ class TopHeader extends Component{
                         borderRadius: '20px',
                         width: isMobile ? this.state.width / 1.2 : '50%',
                     }}
+                    onChange={(e) => {
+                        e.preventDefault();
+                        productNameChanged(e.target.value);
+                    }}
+                    onKeyPress={(e) => {
+                        if(e.charCode === 13){
+
+                            e.preventDefault();
+
+                            searchProduct(product_name);
+
+                            if(location.pathname !== "/search-product"){
+
+                                console.log("go to search product page");
+
+                                history.push("/search-product");
+
+                            }
+
+                        }
+                    }}
+                    value={product_name}
                 />
 
             </Form>
@@ -451,13 +506,21 @@ const mapStateToProps = (state) => {
         header_categories
     } = state.user_pages;
 
+    const {
+        product_name
+    } = state.search_product;
 
     return {
-        header_categories
+        header_categories,
+        product_name
     };
 
 
 };
 
 
-export default connect(mapStateToProps)(TopHeader);
+export default connect(mapStateToProps, {
+    productNameChanged,
+    clearProductNameSearch,
+    searchProduct
+})(TopHeader);

@@ -29,7 +29,7 @@ export const initializeHomePage = () => {
 
                 const topics = data.topics;
 
-                console.log(topics);
+                // console.log(topics);
 
                 dispatch({type: INITIALIZE_LANDING_PAGE_COMPLETE, payload: {
                     topics: topics

@@ -19,15 +19,16 @@ class Landing extends Component {
 
         const params = props.match.params;
 
+        const location = props.location;
 
         const width = window.innerWidth;
 
         const height = window.innerHeight;
 
-
         this.state = {
             history,
             params,
+            location,
             width,
             height
         };
@@ -174,7 +175,11 @@ class Landing extends Component {
 
                 <div>
 
-                    <TopHeader history={this.state.history} params={this.state.params}/>
+                    <TopHeader
+                        history={this.state.history}
+                        params={this.state.params}
+                        location={this.state.location}
+                    />
 
                     {this.renderTopics()}
 
