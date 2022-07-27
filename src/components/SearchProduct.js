@@ -75,7 +75,7 @@ class SearchProduct extends Component{
 
     renderProductsList(){
 
-        const products = this.getProducts();
+        const products = isMobile ? this.props.products : this.getProducts();
 
         return _.map(products, (product, index) => {
 
@@ -103,7 +103,13 @@ class SearchProduct extends Component{
 
                     <Card
                         key={index}
-                        style={{
+                        style={
+                            isMobile ?
+                                {
+                                    width: this.state.width - 35,
+                                    margin: '15px'
+                                } :
+                            {
                             flexBasis: this.state.width / 4,
                             margin: '15px'
                         }}
@@ -141,7 +147,12 @@ class SearchProduct extends Component{
 
             return(
 
-                <div style={{
+                <div style={ isMobile ? {
+                    display: 'flex',
+                    flex: 1,
+                    justifyContent: 'center',
+                    flexDirection: 'column'
+                } : {
                     display: 'flex',
                     flex: 1,
                     justifyContent: 'center',
