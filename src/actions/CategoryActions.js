@@ -51,12 +51,6 @@ export const fetchCategoryData = (category_id, history) => {
 
                     const products = data.products;
 
-                    console.log(category_name);
-
-                    console.log(subcategories);
-
-                    console.log(products);
-
                     if( (products.length === 0 && subcategories.length > 0) || (products.length === 0 && subcategories.length === 0)){
 
                         history.push("/");

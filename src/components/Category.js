@@ -25,13 +25,56 @@ class Category extends Component{
 
         const height = window.innerHeight;
 
+        const category_id = parseInt(params.category_id);
+
         this.state = {
             history,
             params,
             location,
             width,
-            height
+            height,
+            category_id
         };
+
+    }
+
+    initializePage(category_id){
+
+        const {fetchCategoryData} = this.props;
+
+        const { history } = this.state;
+
+        fetchCategoryData(category_id, history);
+
+
+    }
+
+
+    componentDidUpdate(prevProps){
+
+        const { history, category_id } = this.state;
+
+        const { clearCategoryPageState } = this.props;
+
+        const current_category_id = parseInt(category_id);
+
+        const new_category_id = parseInt(history.location.pathname.split("=")[1]);
+
+
+        if(current_category_id !== new_category_id){
+
+            console.log("reinitialize category page");
+
+            clearCategoryPageState();
+
+            this.setState({category_id: new_category_id});
+
+            this.initializePage(new_category_id);
+
+
+        }
+
+
 
     }
 
@@ -41,22 +84,18 @@ class Category extends Component{
 
     }
 
+
+
     componentDidMount() {
 
-        const {fetchCategoryData} = this.props;
-
-        const { history, params } = this.state;
-
-        const category_id = params.category_id;
-
-        fetchCategoryData(category_id, history);
+        this.initializePage(this.state.category_id);
 
 
     }
 
     renderBody(){
 
-        const { fetching_category_data, initializing_user_page } = this.props;
+        const { fetching_category_data, initializing_user_page, category_name } = this.props;
 
         if(fetching_category_data || initializing_user_page){
 
@@ -81,6 +120,11 @@ class Category extends Component{
                         params={this.state.params}
                         location={this.state.location}
                     />
+
+
+                    <p style={{textAlign: 'center', fontSize: '38px'}}>
+                        {category_name}
+                    </p>
 
 
 
