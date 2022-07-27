@@ -287,6 +287,8 @@ class TopHeader extends Component{
 
     renderSubcategories(subcategories){
 
+        const { history } = this.state;
+
         return _.map(subcategories, (subcategory) => {
 
             return(
@@ -295,7 +297,8 @@ class TopHeader extends Component{
                     key={subcategory.id}
                     style={{marginBottom: '10px'}}
                     onClick={() => {
-                        console.log(`${subcategory.name} was clicked!`)
+                        history.push(`/category/category_id=${subcategory.id}`);
+                        this.setState({side_menu_visible: false});
                     }}
                 >
 
@@ -320,6 +323,8 @@ class TopHeader extends Component{
 
     renderParentCategory(category){
 
+        const { history } = this.state;
+
         if(category.has_products){
 
             return(
@@ -329,7 +334,8 @@ class TopHeader extends Component{
                     key={category.id}
                     style={{marginBottom: '10px'}}
                     onClick={() => {
-                        console.log(`${category.name} was clicked`)
+                        history.push(`/category/category_id=${category.id}`);
+                        this.setState({side_menu_visible: false});
                     }}
                 >
                     <div className="category-items-container">
@@ -355,6 +361,8 @@ class TopHeader extends Component{
 
         const { header_categories } = this.props;
 
+        const { history } = this.state;
+
         return _.map(header_categories, (category) => {
 
             const subcategories = category.subcategories;
@@ -363,7 +371,10 @@ class TopHeader extends Component{
 
                 return(
 
-                    <Card key={category.id} style={{marginBottom: '10px'}}>
+                    <Card
+                        key={category.id}
+                        style={{marginBottom: '10px'}}
+                    >
 
                         <Accordion.Item eventKey={category.id}>
 
@@ -394,7 +405,8 @@ class TopHeader extends Component{
                         key={category.id}
                         style={{marginBottom: '10px'}}
                         onClick={() => {
-                            console.log(`${category.name} was clicked`)
+                            history.push(`/category/category_id=${category.id}`);
+                            this.setState({side_menu_visible: false});
                         }}
                     >
 

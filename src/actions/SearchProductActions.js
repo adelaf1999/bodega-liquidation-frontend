@@ -75,8 +75,6 @@ export const searchProduct = (product_name) => {
 
                         const success = data.success;
 
-                        const message = data.message;
-
                         const products = data.products;
 
                         if(success){
@@ -99,6 +97,8 @@ export const searchProduct = (product_name) => {
 
 
                         }else{
+
+                            const message = data.message;
 
                             console.log(message);
 

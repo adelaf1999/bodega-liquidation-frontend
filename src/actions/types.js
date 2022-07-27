@@ -2,6 +2,12 @@ export const BACKEND_DOMAIN =  ( !process.env.NODE_ENV || process.env.NODE_ENV =
 export const BACKEND_URL =  `${ ( !process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 'http' : 'https'}://${BACKEND_DOMAIN}`;
 
 
+// Category Types
+export const VIEW_CATEGORY_ROUTE = `${BACKEND_URL}/view-category`;
+export const FETCH_CATEGORY_DATA = "fetch_category_data";
+export const FETCH_CATEGORY_DATA_COMPLETE = "fetch_category_data_complete";
+export const CLEAR_CATEGORY_PAGE_STATE = "clear_category_page_state";
+
 // SearchProductTypes
 export const SEARCH_PRODUCT_ROUTE = `${BACKEND_URL}/user-search-product`;
 export const SEARCH_PRODUCT = "search_product";
