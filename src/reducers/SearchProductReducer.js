@@ -3,7 +3,8 @@ import {
     SEARCH_PRODUCT_SUCCESS,
     SEARCH_PRODUCT_FAILURE,
     CLEAR_PRODUCT_NAME_SEARCH,
-    PRODUCT_NAME_CHANGED
+    PRODUCT_NAME_CHANGED,
+    CLEAR_SEARCH_PRODUCT_STATE
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -14,6 +15,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case CLEAR_SEARCH_PRODUCT_STATE:
+            return{
+                ...state,
+                ...INITIAL_STATE
+            };
         case PRODUCT_NAME_CHANGED:
             return{
                 ...state,

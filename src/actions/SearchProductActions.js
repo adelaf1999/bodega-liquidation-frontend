@@ -4,11 +4,20 @@ import {
     SEARCH_PRODUCT_SUCCESS,
     SEARCH_PRODUCT_FAILURE,
     CLEAR_PRODUCT_NAME_SEARCH,
-    PRODUCT_NAME_CHANGED
+    PRODUCT_NAME_CHANGED,
+    CLEAR_SEARCH_PRODUCT_STATE
 } from "./types";
 import axios from "axios";
 import { getFormData } from "../helpers";
 import _ from "lodash";
+
+export const clearSearchProductState = () => {
+
+    return{
+      type: CLEAR_SEARCH_PRODUCT_STATE
+    };
+
+};
 
 export const productNameChanged = (product_name) => {
 

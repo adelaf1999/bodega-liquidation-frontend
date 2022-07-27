@@ -6,7 +6,7 @@ import TopHeader from "./TopHeader";
 import {Spinner, Card, Image} from "react-bootstrap";
 import {
     searchProduct,
-    clearProductNameSearch
+    clearSearchProductState
 } from "../actions";
 
 class SearchProduct extends Component{
@@ -39,7 +39,7 @@ class SearchProduct extends Component{
 
     componentWillUnmount(){
 
-        this.props.clearProductNameSearch();
+        this.props.clearSearchProductState();
 
     }
 
@@ -242,5 +242,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     searchProduct,
-    clearProductNameSearch
+    clearSearchProductState
 })(SearchProduct);
