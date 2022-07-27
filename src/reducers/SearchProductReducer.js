@@ -4,17 +4,24 @@ import {
     SEARCH_PRODUCT_FAILURE,
     CLEAR_PRODUCT_NAME_SEARCH,
     PRODUCT_NAME_CHANGED,
-    CLEAR_SEARCH_PRODUCT_STATE
+    CLEAR_SEARCH_PRODUCT_STATE,
+    SEARCH_RESULTS_FOUND_CHANGED
 } from "../actions/types";
 
 const INITIAL_STATE = {
     searching_product: false,
     products: [],
-    product_name: ''
+    product_name: '',
+    search_results_found: null
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case SEARCH_RESULTS_FOUND_CHANGED:
+            return{
+                ...state,
+                search_results_found: action.payload
+            };
         case CLEAR_SEARCH_PRODUCT_STATE:
             return{
                 ...state,
@@ -44,7 +51,8 @@ export default (state = INITIAL_STATE, action) => {
         case SEARCH_PRODUCT:
             return{
                 ...state,
-                searching_product: true
+                searching_product: true,
+                search_results_found: null
             };
         default:
             return state;

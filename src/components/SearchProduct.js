@@ -134,7 +134,8 @@ class SearchProduct extends Component{
 
     renderProducts(){
 
-        const { products } = this.props;
+        const { products, search_results_found, product_name } = this.props;
+
 
         if(products !== null && products !== undefined && !_.isEmpty(products)){
 
@@ -155,7 +156,61 @@ class SearchProduct extends Component{
             );
 
 
+        }else{
+
+            if(search_results_found === null){
+
+                // Initially search_results_found is null and products length is 0 if manual access using route
+
+                return(
+
+                    <div  >
+
+                        <p style={{
+                            textAlign: 'center',
+                            fontSize: '22px'
+                        }}>
+                            Search Bodega Liquidation For Any Product
+                        </p>
+
+                    </div>
+
+
+
+                );
+
+
+            }else {
+
+                return (
+
+                    <div >
+
+                        <p style={{
+                            textAlign: 'center',
+                            fontSize: '22px'
+                        }}>
+                            There Were No Results Found
+                        </p>
+
+                        <p  style={{
+                            textAlign: 'center',
+                            fontSize: '22px'
+                        }}>
+                            Please check your spelling or use different keywords
+                        </p>
+
+                    </div>
+
+                );
+
+            }
+
+
         }
+
+
+
 
 
     }
@@ -226,7 +281,8 @@ const mapStateToProps = (state) => {
     const {
         searching_product,
         products,
-        product_name
+        product_name,
+        search_results_found
     } = state.search_product;
 
 
@@ -234,7 +290,8 @@ const mapStateToProps = (state) => {
         initializing_user_page,
         searching_product,
         products,
-        product_name
+        product_name,
+        search_results_found
     };
 
 

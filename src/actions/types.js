@@ -10,6 +10,7 @@ export const SEARCH_PRODUCT_FAILURE = "search_product_failure";
 export const CLEAR_PRODUCT_NAME_SEARCH = "clear_product_name_search";
 export const PRODUCT_NAME_CHANGED = "product_name_changed";
 export const CLEAR_SEARCH_PRODUCT_STATE = "clear_search_product_state";
+export const SEARCH_RESULTS_FOUND_CHANGED = "search_results_found_changed";
 
 // Landing Page Types
 export const INITIALIZE_LANDING_PAGE_ROUTE = `${BACKEND_URL}/initialize-landing-page`;
