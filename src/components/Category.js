@@ -3,11 +3,13 @@ import {connect} from 'react-redux';
 import _ from "lodash";
 import {isMobile, isDesktop, isTablet} from 'react-device-detect'
 import TopHeader from "./TopHeader";
-import {Spinner, Card, Image} from "react-bootstrap";
+import {Spinner, Card, Image, Carousel, Button} from "react-bootstrap";
 import {
     fetchCategoryData,
     clearCategoryPageState
 } from "../actions";
+
+
 
 class Category extends Component{
 
@@ -27,13 +29,16 @@ class Category extends Component{
 
         const category_id = parseInt(params.category_id);
 
+        const carousel_index = 0;
+
         this.state = {
             history,
             params,
             location,
             width,
             height,
-            category_id
+            category_id,
+            carousel_index
         };
 
     }
@@ -93,6 +98,130 @@ class Category extends Component{
 
     }
 
+    getProducts(){
+
+        let products = this.props.products;
+
+        if(products.length % 3 === 0) {
+
+            return products;
+
+        }else{
+
+            let nearest_multiple_3 = products.length;
+
+            while(nearest_multiple_3 % 3 !== 0){
+
+                products.push({});
+
+                nearest_multiple_3 += 1;
+
+
+            }
+
+            return products;
+
+        }
+
+
+
+    }
+
+
+    renderProductsList(){
+
+        const products = isMobile ? this.props.products : this.getProducts();
+
+        return _.map(products, (product, index) => {
+
+
+            if(_.isEmpty(product)){
+
+                return(
+
+                    <Card
+                        key={index}
+                        style={{
+                            flexBasis: this.state.width / 4,
+                            margin: '15px',
+                            visibility: 'hidden'
+                        }}
+                    />
+
+
+                );
+
+
+            }else{
+
+                return(
+
+                    <Card
+                        key={index}
+                        style={
+                            isMobile ?
+                                {
+                                    width: this.state.width - 35,
+                                    margin: '15px'
+                                } :
+                                {
+                                    flexBasis: this.state.width / 4,
+                                    margin: '15px'
+                                }}
+                    >
+
+                        <Card.Img variant="top" className="product-image" src={product.main_picture_url} />
+
+                        <Card.Footer style={{
+                            height: '80px'
+                        }}>
+                            {product.name}
+                        </Card.Footer>
+
+
+                    </Card>
+
+                );
+
+
+
+            }
+
+
+
+        });
+
+
+    }
+
+
+    renderProducts(){
+
+        return(
+
+            <div style={ isMobile ? {
+                display: 'flex',
+                flex: 1,
+                justifyContent: 'center',
+                flexDirection: 'column'
+            } : {
+                display: 'flex',
+                flex: 1,
+                justifyContent: 'center',
+                flexDirection: 'row',
+                flexWrap: 'wrap'
+            }}>
+
+                {this.renderProductsList()}
+
+            </div>
+
+        );
+
+    }
+
+
+
     renderBody(){
 
         const { fetching_category_data, initializing_user_page, category_name } = this.props;
@@ -122,10 +251,14 @@ class Category extends Component{
                     />
 
 
-                    <p style={{textAlign: 'center', fontSize: '38px'}}>
+                    <p style={{
+                        textAlign: 'center',
+                        fontSize: isMobile ? '30px' : '38px'
+                    }}>
                         {category_name}
                     </p>
 
+                    {this.renderProducts()}
 
 
                 </div>
