@@ -113,6 +113,9 @@ class SearchProduct extends Component{
                             flexBasis: this.state.width / 4,
                             margin: '15px'
                         }}
+                        onClick={() => {
+                            this.state.history.push(`/product/product_id=${product.id}`);
+                        }}
                     >
 
                         <Card.Img variant="top" className="product-image" src={product.picture_url} />

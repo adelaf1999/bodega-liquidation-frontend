@@ -86,7 +86,7 @@ class Landing extends Component {
                             margin: isMobile ? '10px' : '15px'
                         }}
                         onClick={() => {
-                            console.log(`${product.name} was clicked!`)
+                            this.state.history.push(`/product/product_id=${product.id}`);
                         }}
                     >
 

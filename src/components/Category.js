@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import _ from "lodash";
 import {isMobile, isDesktop, isTablet} from 'react-device-detect'
 import TopHeader from "./TopHeader";
-import {Spinner, Card, Image, Carousel, Button} from "react-bootstrap";
+import {Spinner, Card, Image, Button} from "react-bootstrap";
 import {
     fetchCategoryData,
     clearCategoryPageState
@@ -29,16 +29,13 @@ class Category extends Component{
 
         const category_id = parseInt(params.category_id);
 
-        const carousel_index = 0;
-
         this.state = {
             history,
             params,
             location,
             width,
             height,
-            category_id,
-            carousel_index
+            category_id
         };
 
     }
@@ -168,6 +165,9 @@ class Category extends Component{
                                     flexBasis: this.state.width / 4,
                                     margin: '15px'
                                 }}
+                        onClick={() => {
+                            this.state.history.push(`/product/product_id=${product.id}`);
+                        }}
                     >
 
                         <Card.Img variant="top" className="product-image" src={product.main_picture_url} />

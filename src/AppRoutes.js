@@ -6,11 +6,11 @@ import {
 } from "react-router-dom";
 import {getHeaderCategories} from "./actions";
 import {connect} from 'react-redux';
-
-
 import Landing from "./components/Landing";
 import SearchProduct from "./components/SearchProduct";
 import Category from "./components/Category";
+import Product from "./components/Product";
+
 
 class AppRoutes extends Component{
 
@@ -35,6 +35,8 @@ class AppRoutes extends Component{
                     <Route exact path="/search-product" component={SearchProduct} />
 
                     <Route exact path="/category/category_id=:category_id" component={Category} />
+
+                    <Route exact path="/product/product_id=:product_id" component={Product} />
 
 
                 </Switch>

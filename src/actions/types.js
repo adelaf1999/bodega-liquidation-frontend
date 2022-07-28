@@ -1,6 +1,11 @@
 export const BACKEND_DOMAIN =  ( !process.env.NODE_ENV || process.env.NODE_ENV === 'development')  ?  "localhost:3000" : "api.bodegaliquidation.com";
 export const BACKEND_URL =  `${ ( !process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 'http' : 'https'}://${BACKEND_DOMAIN}`;
 
+// Product Types
+export const VIEW_PRODUCT_ROUTE = `${BACKEND_URL}/user-view-product`;
+export const FETCH_PRODUCT_DATA = "fetch_product_data";
+export const FETCH_PRODUCT_DATA_COMPLETE = "fetch_product_data_complete";
+export const CLEAR_PRODUCT_PAGE_STATE = "clear_product_page_state";
 
 // Category Types
 export const VIEW_CATEGORY_ROUTE = `${BACKEND_URL}/view-category`;
