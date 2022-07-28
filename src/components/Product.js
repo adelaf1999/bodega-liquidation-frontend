@@ -139,6 +139,91 @@ class Product extends Component{
 
     }
 
+    renderSimilarItems(){
+
+        const { similar_items } = this.props;
+
+        if(!_.isEmpty(similar_items)){
+
+            const responsive =  {
+                desktop: {
+                    breakpoint: { max: 3000, min: 1024 },
+                    items: 3,
+                    slidesToSlide: 3
+                },
+                tablet: {
+                    breakpoint: { max: 1024, min: 464 },
+                    items: 2,
+                    slidesToSlide: 2
+                },
+                mobile: {
+                    breakpoint: { max: 464, min: 0 },
+                    items: 1,
+                    slidesToSlide: 1
+                }
+            };
+
+
+            return(
+
+              <div style={{marginTop: '30px', textAlign: 'center'}}>
+
+                  <p style={{
+                      fontSize: '22px',
+                      fontWeight: 'bold'
+                  }}>
+                      Similar Items
+                  </p>
+
+                  <Carousel
+                      responsive={responsive}
+                      removeArrowOnDeviceType={["tablet", "mobile"]}
+                  >
+
+                      {similar_items.map(product => (
+
+
+                          <Card
+                              key={product.id}
+                              style={{
+                                  marginRight: '20px'
+                              }}
+                              onClick={() => {
+                                  this.state.history.push(`/product/product_id=${product.id}`);
+                              }}
+                          >
+
+                              <Image
+                                  src={product.picture_url}
+                                  className="product-image"
+                              />
+
+                              <Card.Footer
+                                  style={{
+                                      height: '80px'
+                                  }}>
+                                  {product.name}
+                              </Card.Footer>
+
+                          </Card>
+                      ))}
+
+
+                  </Carousel>
+
+
+              </div>
+
+
+            );
+
+
+
+        }
+
+
+    }
+
     renderBody(){
 
         const { fetching_product_data, initializing_user_page, product} = this.props;
@@ -186,6 +271,8 @@ class Product extends Component{
                         slidesToSlide: 1
                     }
                 };
+
+
 
 
                 return(
@@ -318,6 +405,10 @@ class Product extends Component{
 
 
                                 </Accordion>
+
+
+                                {this.renderSimilarItems()}
+
 
                             </div>
 
