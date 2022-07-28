@@ -166,11 +166,15 @@ class Product extends Component{
 
             return(
 
-              <div style={{marginTop: '30px', textAlign: 'center'}}>
+              <div style={{
+                  marginTop: isMobile ? '25px' : '30px',
+                  marginBottom: isMobile ? '30px' : 0
+              }}>
 
                   <p style={{
                       fontSize: '22px',
-                      fontWeight: 'bold'
+                      fontWeight: 'bold',
+                      textAlign: 'center'
                   }}>
                       Similar Items
                   </p>
@@ -185,8 +189,8 @@ class Product extends Component{
 
                           <Card
                               key={product.id}
-                              style={{
-                                  marginRight: '20px'
+                              style={ {
+                                  marginRight: isMobile ? 0 : '20px'
                               }}
                               onClick={() => {
                                   this.state.history.push(`/product/product_id=${product.id}`);
@@ -285,7 +289,14 @@ class Product extends Component{
                             location={this.state.location}
                         />
 
-                        <p style={{
+                        <p style={ isMobile ? {
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                            marginBottom: '1.5rem',
+                            marginLeft: '5px',
+                            marginRight: '5px',
+                            textAlign: 'center'
+                        } :  {
                             fontSize: '22px',
                             fontWeight: 'bold',
                             textAlign: 'center',
@@ -295,7 +306,13 @@ class Product extends Component{
                         </p>
 
 
-                        <div style={{
+                        <div style={ isMobile ? {
+                            display: 'flex',
+                            flex: 1,
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            alignItems: 'center'
+                        } : {
                             display: 'flex',
                             flex: 1,
                             justifyContent: 'space-around',
@@ -307,7 +324,10 @@ class Product extends Component{
 
 
 
-                            <div style={{
+                            <div style={ isMobile ? {
+                                width: this.state.width - 50,
+                                marginBottom: '15px'
+                            } :{
                                 width: this.state.width / 3
                             }}>
 
@@ -324,6 +344,15 @@ class Product extends Component{
                                             <Image
                                                 src={url}
                                                 className="view-product-image"
+                                                style={ isMobile ? {
+                                                    width: '300px',
+                                                    height: '200px',
+                                                    padding: '20px'
+                                                } :{
+                                                    width: '600px',
+                                                    height: '600px',
+                                                    padding: '20px'
+                                                }}
                                             />
 
                                         </Card>
@@ -336,7 +365,9 @@ class Product extends Component{
 
 
 
-                            <div style={{
+                            <div style={ isMobile ? {
+                                width: this.state.width - 50
+                            } : {
                                 width: this.state.width / 1.8
                             }}>
 
@@ -346,7 +377,7 @@ class Product extends Component{
 
                                         <Accordion.Header>Product Description</Accordion.Header>
 
-                                        <Accordion.Body style={{fontSize: '18px'}}>
+                                        <Accordion.Body style={ isMobile ? {fontSize: '16px'} : {fontSize: '18px'}}>
                                             {description}
                                         </Accordion.Body>
 

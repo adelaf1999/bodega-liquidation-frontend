@@ -1,8 +1,5 @@
 .view-product-image{
     object-fit: contain;
-    width: 600px;
-    height: 600px;
-    padding: 20px;
     align-self: center;
 }
 .product-attribute-container{
