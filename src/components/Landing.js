@@ -1,12 +1,13 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {initializeHomePage} from "../actions";
-import {Navbar, Form, FormControl, Offcanvas, Button, Accordion, Card, Image, Spinner} from "react-bootstrap";
+import { Card, Image, Spinner} from "react-bootstrap";
 import {List as HamburgerIcon, ChevronRight} from 'react-bootstrap-icons';
 import _ from "lodash";
-import {ScrollMenu} from "react-horizontal-scrolling-menu";
 import {isMobile, isDesktop, isTablet} from 'react-device-detect';
 import TopHeader from "./TopHeader";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 
 class Landing extends Component {
@@ -51,17 +52,38 @@ class Landing extends Component {
 
         const products = topic.products;
 
+        const responsive = {
+            desktop: {
+                breakpoint: { max: 3000, min: 1024 },
+                items: 3,
+                slidesToSlide: 3 // optional, default to 1.
+            },
+            tablet: {
+                breakpoint: { max: 1024, min: 464 },
+                items: 2,
+                slidesToSlide: 2 // optional, default to 1.
+            },
+            mobile: {
+                breakpoint: { max: 464, min: 0 },
+                items: 1,
+                slidesToSlide: 1 // optional, default to 1.
+            }
+        };
+
         return(
 
 
-            <ScrollMenu key={topic.id}>
+            <Carousel
+                key={topic.id}
+                responsive={responsive}
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+            >
 
                 {products.map(product => (
                     <Card
                         key={product.id}
                         style={{
-                            margin: isMobile ? '10px' : '15px',
-                            width: isMobile ? this.state.width - 70 : this.state.width / 5
+                            margin: isMobile ? '10px' : '15px'
                         }}
                         onClick={() => {
                             console.log(`${product.name} was clicked!`)
@@ -84,7 +106,7 @@ class Landing extends Component {
                 ))}
 
 
-            </ScrollMenu>
+            </Carousel>
 
         );
 
