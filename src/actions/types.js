@@ -8,7 +8,7 @@ export const FETCH_PRODUCT_DATA_COMPLETE = "fetch_product_data_complete";
 export const CLEAR_PRODUCT_PAGE_STATE = "clear_product_page_state";
 
 // Category Types
-export const VIEW_CATEGORY_ROUTE = `${BACKEND_URL}/view-category`;
+export const VIEW_CATEGORY_ROUTE = `${BACKEND_URL}/user-view-category`;
 export const FETCH_CATEGORY_DATA = "fetch_category_data";
 export const FETCH_CATEGORY_DATA_COMPLETE = "fetch_category_data_complete";
 export const CLEAR_CATEGORY_PAGE_STATE = "clear_category_page_state";
