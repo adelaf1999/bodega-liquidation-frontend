@@ -130,7 +130,7 @@ class Landing extends Component {
 
                     <Card.Header style={{
                         fontSize: '20px',
-                        backgroundColor: '#000080',
+                        backgroundColor: '#d20505',
                         color: '#fff',
                         fontWeight: 'bold'
                     }}>

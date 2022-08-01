@@ -66,9 +66,18 @@ class TopHeader extends Component{
 
         return(
             <Image
-                src={require("../images/icon.png")}
+                src={require("../images/logo.png")}
                 style={
-                    isMobile ? { width: '100px', height: '100px'} : {  width: '75px', height: '75px', marginLeft: '10px' }
+                    isMobile ? {
+                        width: '200px',
+                        height: '100px',
+                        marginTop: '10px'
+                    } : {
+                        width: '150px',
+                        height: '100px',
+                        marginLeft: '15px',
+                        marginRight: '25px'
+                    }
                 }
                 className="logo"
                 onClick={() => {
@@ -154,7 +163,7 @@ class TopHeader extends Component{
                     placeholder="Search Bodega Liquidation"
                     className="mr-sm-2 searchbar"
                     style={{
-                        marginRight: isMobile ? 0 : this.state.width / 4,
+                        marginRight: isMobile ? 0 : this.state.width / 6.5,
                         borderRadius: '20px',
                         width: isMobile ? this.state.width / 1.2 : '50%',
                     }}
@@ -188,24 +197,6 @@ class TopHeader extends Component{
 
     }
 
-    renderCompanyName(){
-        return(
-            <Navbar.Brand
-                onClick={() => {
-                    this.state.history.push("/");
-                }}
-                style={{
-                    color: "#fff",
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    marginRight: '50px'
-                }}
-            >
-                Bodega Liquidation
-            </Navbar.Brand>
-
-        );
-    }
 
     renderHeaderContent(){
 
@@ -264,7 +255,6 @@ class TopHeader extends Component{
                         {this.renderLogo()}
 
 
-                        {this.renderCompanyName()}
 
                     </div>
 
