@@ -372,7 +372,7 @@ class TopHeader extends Component{
 
                             <Accordion.Body>
 
-                                {this.renderSubcategories(subcategories, category)}
+                                {this.renderSubcategories(subcategories)}
 
                                 {this.renderParentCategory(category)}
 
